@@ -1,8 +1,8 @@
 package com.example.order.ControllerTest;
 
-import com.example.order.Controller.OrderController;
 import com.example.order.DTO.*;
 import com.example.order.Service.OrderService;
+import com.example.order.controller.OrderController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,3 +1,181 @@
+//package com.example.order.Model;
+//
+//import jakarta.persistence.*;
+//import java.math.BigDecimal;
+//import java.time.Instant;
+//import java.util.ArrayList;
+//import java.util.List;
+//import java.util.UUID;
+//
+//import com.example.order.Enums.OrderStatus;
+//import org.hibernate.annotations.GenericGenerator;
+//@Entity
+//@Table(name = "orders")
+//public class Order {
+//
+//	@Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment DB generated ID
+//    @Column(name = "order_id")
+//    private Long orderId;
+//
+//    @Column(name = "user_id", nullable = false)
+//    private Long userId;
+//
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "order_status", nullable = false)
+//    private OrderStatus orderStatus;
+//
+//    @Column(name = "total_amount", nullable = false)
+//    private BigDecimal totalAmount = BigDecimal.ZERO;
+//
+//    @Column(name = "payment_status")
+//    private String paymentStatus;
+//
+//    @Column(name = "idempotency_key", unique = true)
+//    private String idempotencyKey;
+//
+//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<OrderItem> items = new ArrayList<>();
+//
+//    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//    private ShippingAddress shippingAddress;
+//
+//    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//    private Payment payment;
+//
+//    @Column(name = "created_at", updatable = false)
+//    private Instant createdAt;
+//
+//    @Column(name = "updated_at")
+//    private Instant updatedAt;
+//
+//    @PrePersist
+//    public void onCreate() {
+//        this.createdAt = Instant.now();
+//        this.updatedAt = this.createdAt;
+//    }
+//
+//    @PreUpdate
+//    public void onUpdate() {
+//        this.updatedAt = Instant.now();
+//    }
+//
+//    public Long getOrderId() {
+//        return orderId;
+//    }
+//    public void setOrderId(Long orderId) {
+//        this.orderId = orderId;
+//    }
+//
+//    public Long getUserId() {
+//        return userId;
+//    }
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
+//
+//    public OrderStatus getOrderStatus() {
+//        return orderStatus;
+//    }
+//    public void setOrderStatus(OrderStatus orderStatus) {
+//        this.orderStatus = orderStatus;
+//    }
+//
+//    public BigDecimal getTotalAmount() {
+//        return totalAmount;
+//    }
+//    public void setTotalAmount(BigDecimal totalAmount) {
+//        this.totalAmount = totalAmount;
+//    }
+//
+//    public String getPaymentStatus() {
+//        return paymentStatus;
+//    }
+//    public void setPaymentStatus(String paymentStatus) {
+//        this.paymentStatus = paymentStatus;
+//    }
+//
+//    public String getIdempotencyKey() {
+//        return idempotencyKey;
+//    }
+//    public void setIdempotencyKey(String idempotencyKey) {
+//        this.idempotencyKey = idempotencyKey;
+//    }
+//
+//    public List<OrderItem> getItems() {
+//        return items;
+//    }
+//    public void setItems(List<OrderItem> items) {
+//        this.items = items;
+//    }
+//
+//    public ShippingAddress getShippingAddress() {
+//        return shippingAddress;
+//    }
+//    public void setShippingAddress(ShippingAddress shippingAddress) {
+//        this.shippingAddress = shippingAddress;
+//    }
+//
+//    public Payment getPayment() {
+//        return payment;
+//    }
+//    public void setPayment(Payment payment) {
+//        this.payment = payment;
+//    }
+//
+//    public Instant getCreatedAt() {
+//        return createdAt;
+//    }
+//    public void setCreatedAt(Instant createdAt) {
+//        this.createdAt = createdAt;
+//    }
+//
+//    public Instant getUpdatedAt() {
+//        return updatedAt;
+//    }
+//    public void setUpdatedAt(Instant updatedAt) {
+//        this.updatedAt = updatedAt;
+//    }
+//
+//    public void addItem(OrderItem item) {
+//        items.add(item);
+//        item.setOrder(this);
+//    }
+//
+//    public void setShipping(ShippingAddress shipping) {
+//        this.shippingAddress = shipping;
+//        if (shipping != null) shipping.setOrder(this);
+//    }
+//
+//    public void setPaymentEntity(Payment payment) {
+//        this.payment = payment;
+//        if (payment != null) payment.setOrder(this);
+//    }
+//
+//	public Order(Long orderId, Long userId, OrderStatus orderStatus, BigDecimal totalAmount, String paymentStatus,
+//			String idempotencyKey, List<OrderItem> items, ShippingAddress shippingAddress, Payment payment,
+//			Instant createdAt, Instant updatedAt) {
+//		super();
+//		this.orderId = orderId;
+//		this.userId = userId;
+//		this.orderStatus = orderStatus;
+//		this.totalAmount = totalAmount;
+//		this.paymentStatus = paymentStatus;
+//		this.idempotencyKey = idempotencyKey;
+//		this.items = items;
+//		this.shippingAddress = shippingAddress;
+//		this.payment = payment;
+//		this.createdAt = createdAt;
+//		this.updatedAt = updatedAt;
+//	}
+//
+//	public Order() {
+//		super();
+//	}
+//    
+//    
+//}
+
 package com.example.order.Model;
 
 import jakarta.persistence.*;
@@ -5,21 +183,23 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import com.example.order.Enums.OrderStatus;
-import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "orders")
 public class Order {
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment DB generated ID
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long orderId;
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
+
+    @Column(name = "cart_id", nullable = true)
+    private Long cartId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "order_status", nullable = false)
@@ -40,15 +220,13 @@ public class Order {
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private ShippingAddress shippingAddress;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Payment payment;
-
     @Column(name = "created_at", updatable = false)
     private Instant createdAt;
 
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+    // Lifecycle hooks
     @PrePersist
     public void onCreate() {
         this.createdAt = Instant.now();
@@ -60,118 +238,48 @@ public class Order {
         this.updatedAt = Instant.now();
     }
 
-    public Long getOrderId() {
-        return orderId;
-    }
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
+    // ---------------- GETTERS & SETTERS ----------------
 
-    public Long getUserId() {
-        return userId;
-    }
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    public Long getOrderId() { return orderId; }
+    public void setOrderId(Long orderId) { this.orderId = orderId; }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+    public Long getCartId() { return cartId; }
+    public void setCartId(Long cartId) { this.cartId = cartId; }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
+    public OrderStatus getOrderStatus() { return orderStatus; }
+    public void setOrderStatus(OrderStatus orderStatus) { this.orderStatus = orderStatus; }
 
-    public String getIdempotencyKey() {
-        return idempotencyKey;
-    }
-    public void setIdempotencyKey(String idempotencyKey) {
-        this.idempotencyKey = idempotencyKey;
-    }
+    public BigDecimal getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(BigDecimal totalAmount) { this.totalAmount = totalAmount; }
 
-    public List<OrderItem> getItems() {
-        return items;
-    }
-    public void setItems(List<OrderItem> items) {
-        this.items = items;
-    }
+    public String getPaymentStatus() { return paymentStatus; }
+    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
 
-    public ShippingAddress getShippingAddress() {
-        return shippingAddress;
-    }
+    public String getIdempotencyKey() { return idempotencyKey; }
+    public void setIdempotencyKey(String idempotencyKey) { this.idempotencyKey = idempotencyKey; }
+
+    public List<OrderItem> getItems() { return items; }
+    public void setItems(List<OrderItem> items) { this.items = items; }
+
+    public ShippingAddress getShippingAddress() { return shippingAddress; }
     public void setShippingAddress(ShippingAddress shippingAddress) {
         this.shippingAddress = shippingAddress;
+        if (shippingAddress != null) shippingAddress.setOrder(this);
     }
 
-    public Payment getPayment() {
-        return payment;
-    }
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
+    public Instant getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
+    public Instant getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(Instant updatedAt) { this.updatedAt = updatedAt; }
 
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+    // ---------------- Helper Methods ----------------
 
     public void addItem(OrderItem item) {
         items.add(item);
         item.setOrder(this);
     }
-
-    public void setShipping(ShippingAddress shipping) {
-        this.shippingAddress = shipping;
-        if (shipping != null) shipping.setOrder(this);
-    }
-
-    public void setPaymentEntity(Payment payment) {
-        this.payment = payment;
-        if (payment != null) payment.setOrder(this);
-    }
-
-	public Order(Long orderId, Long userId, OrderStatus orderStatus, BigDecimal totalAmount, String paymentStatus,
-			String idempotencyKey, List<OrderItem> items, ShippingAddress shippingAddress, Payment payment,
-			Instant createdAt, Instant updatedAt) {
-		super();
-		this.orderId = orderId;
-		this.userId = userId;
-		this.orderStatus = orderStatus;
-		this.totalAmount = totalAmount;
-		this.paymentStatus = paymentStatus;
-		this.idempotencyKey = idempotencyKey;
-		this.items = items;
-		this.shippingAddress = shippingAddress;
-		this.payment = payment;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
-
-	public Order() {
-		super();
-	}
-    
-    
 }
