@@ -13,4 +13,7 @@ public interface OrderService {
     OrderResponseDto updateOrderStatus(Long orderId, String status);
     OrderResponseDto cancelOrder(Long orderId);
     List<OrderResponseDto> getAllOrders();
+ // in com.example.order.Service.OrderService
+    OrderResponseDto getByIdempotencyKey(String key);
+
 }

@@ -78,17 +78,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@CrossOrigin(
-	    origins = "http://localhost:3000",
-	    allowedHeaders = "*",
-	    methods = {
-	        RequestMethod.GET,
-	        RequestMethod.POST,
-	        RequestMethod.PUT,
-	        RequestMethod.DELETE,
-	        RequestMethod.OPTIONS
-	    }
-	)
+
 @RestController
 @RequestMapping("/api/v1/orders")
 public class OrderController {
@@ -137,4 +127,12 @@ public class OrderController {
     public ResponseEntity<List<OrderResponseDto>> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
+    
+ // inside OrderController (same package)
+    @GetMapping("/by-idempotency/{key}")
+    public ResponseEntity<OrderResponseDto> getByIdempotency(@PathVariable("key") String key) {
+        OrderResponseDto dto = orderService.getByIdempotencyKey(key);
+        return ResponseEntity.ok(dto);
+    }
+
 }

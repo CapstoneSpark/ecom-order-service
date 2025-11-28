@@ -498,4 +498,13 @@ public class OrderServiceImpl implements OrderService {
                 items
         );
     }
+    @Override
+    public OrderResponseDto getByIdempotencyKey(String key) {
+        Optional<Order> opt = orderRepository.findByIdempotencyKey(key);
+        if (opt.isEmpty()) {
+            throw new ResourceNotFoundException("Order not found for idempotency key: " + key);
+        }
+        return toResponse(opt.get());
+    }
+
 }
