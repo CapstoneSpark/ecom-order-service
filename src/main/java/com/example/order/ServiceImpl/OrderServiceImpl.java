@@ -506,5 +506,14 @@ public class OrderServiceImpl implements OrderService {
         }
         return toResponse(opt.get());
     }
+    
+    
+    public void deleteOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        orderRepository.delete(order);
+    }
+
 
 }

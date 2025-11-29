@@ -15,5 +15,6 @@ public interface OrderService {
     List<OrderResponseDto> getAllOrders();
  // in com.example.order.Service.OrderService
     OrderResponseDto getByIdempotencyKey(String key);
+    public void deleteOrder(Long orderId);
 
 }

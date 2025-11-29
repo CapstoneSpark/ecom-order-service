@@ -108,6 +108,13 @@ public class OrderController {
     public ResponseEntity<OrderResponseDto> getOrder(@PathVariable("id") Long id) {
         return ResponseEntity.ok(orderService.getOrderById(id));
     }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
+        orderService.deleteOrder(id);
+        return ResponseEntity.ok("Order deleted successfully.");
+    }
+
 
     // Update order status (admin)
     @PutMapping("/{id}/status")
