@@ -3,12 +3,9 @@ package com.example.order.DTO;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
+
 public class OrderSummaryDto {
     private Long orderId;
     private BigDecimal totalAmount;

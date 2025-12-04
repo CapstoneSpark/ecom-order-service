@@ -1,18 +1,37 @@
 package com.example.order.Exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-@AllArgsConstructor
 public class CustomErrorResponse {
     private String code;
     private String message;
-	public CustomErrorResponse(String code, String message) {
-		super();
-		this.code = code;
-		this.message = message;
-	}
+    
+    // Empty constructor
+    public CustomErrorResponse() {
+    }
+    
+    // Constructor with parameters
+    public CustomErrorResponse(String code, String message) {
+        super();
+        this.code = code;
+        this.message = message;
+    }
+    
+    // Getter for code
+    public String getCode() {
+        return code;
+    }
+    
+    // Setter for code
+    public void setCode(String code) {
+        this.code = code;
+    }
+    
+    // Getter for message
+    public String getMessage() {
+        return message;
+    }
+    
+    // Setter for message
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

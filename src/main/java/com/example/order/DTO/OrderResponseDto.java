@@ -4,12 +4,9 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
-import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
+
 public class OrderResponseDto {
     private Long orderId;
     private Long userId;

@@ -2,12 +2,9 @@ package com.example.order.DTO;
 
 import java.util.List;
 
-import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
+
 public class OrderRequestDto {
     private Long userId;
     private Long cartId; // optional
